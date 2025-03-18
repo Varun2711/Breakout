@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class GameManager : SingletonMonoBehavior<GameManager>
 {
-    [SerializeField] private int maxLives = 3;
+    [SerializeField] private static int maxLives = 3;
+    public static int GetLives => maxLives;
+    public static void SetLives(int l) => maxLives = l;
     [SerializeField] private Ball ball;
     [SerializeField] private Transform bricksContainer;
     [SerializeField] private ScoreCounterUI scoreCounter;
@@ -52,7 +54,8 @@ public class GameManager : SingletonMonoBehavior<GameManager>
     {
         maxLives--;
         // update lives on HUD here
-        current.text = $"{maxLives}";
+        // current.text = $"{maxLives}";
+        current.SetText($"{GameManager.GetLives}");
         // game over UI if maxLives = 0, then exit to main menu after delay
         if (maxLives <= 0) {
             Destroy(ball.gameObject);
@@ -70,5 +73,6 @@ public class GameManager : SingletonMonoBehavior<GameManager>
         SceneHandler.Instance.LoadMenuScene();
         gameOverUI.SetActive(false);
         Time.timeScale = 1;
+        maxLives = 3;
     }
 }
