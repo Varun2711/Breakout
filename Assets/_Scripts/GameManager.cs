@@ -9,7 +9,8 @@ public class GameManager : SingletonMonoBehavior<GameManager>
 
     private int currentBrickCount;
     private int totalBrickCount;
-    private int score = 0;
+    private static int score = 0;
+    public static int getScore => score;
     private void OnEnable()
     {
         InputHandler.Instance.OnFire.AddListener(FireBall);
