@@ -74,5 +74,6 @@ public class GameManager : SingletonMonoBehavior<GameManager>
         gameOverUI.SetActive(false);
         Time.timeScale = 1;
         maxLives = 3;
+        score = 0;
     }
 }
