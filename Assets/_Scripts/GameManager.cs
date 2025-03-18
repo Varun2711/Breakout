@@ -1,22 +1,32 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using TMPro;
+using UnityEngine;
 
 public class GameManager : SingletonMonoBehavior<GameManager>
 {
-    [SerializeField] private int maxLives = 3;
+    [SerializeField] private static int maxLives = 3;
+    public static int GetLives => maxLives;
+    public static void SetLives(int l) => maxLives = l;
     [SerializeField] private Ball ball;
     [SerializeField] private Transform bricksContainer;
     [SerializeField] private ScoreCounterUI scoreCounter;
     public GameObject vfx_explosion;
+    [SerializeField] private TextMeshProUGUI current;
 
     private int currentBrickCount;
     private int totalBrickCount;
-    private int score = 0;
+    private static int score = 0;
+    public static int GetScore => score;
+    public static void SetScore(int s) => score = s;
+    public GameObject gameOverUI;
+
     private void OnEnable()
     {
         InputHandler.Instance.OnFire.AddListener(FireBall);
         ball.ResetBall();
         totalBrickCount = bricksContainer.childCount;
         currentBrickCount = bricksContainer.childCount;
+        current.SetText($"{maxLives}");
     }
 
     private void OnDisable()
@@ -39,10 +49,16 @@ public class GameManager : SingletonMonoBehavior<GameManager>
             Destroy(effect, 1.5f); // Destroy particle effect after 1.5 seconds
         }
         // add camera shake here
+        CameraShake.Shake(0.5f, 0.24f);
+
         currentBrickCount--;
         Debug.Log($"Destroyed Brick at {position}, {currentBrickCount}/{totalBrickCount} remaining");
         score++;
         scoreCounter.UpdateScore(score);
+        if (score == 21)
+        {
+            score = 0;
+        }
         if (currentBrickCount == 0)
         {
             SceneHandler.Instance.LoadNextScene();
@@ -53,7 +69,26 @@ public class GameManager : SingletonMonoBehavior<GameManager>
     {
         maxLives--;
         // update lives on HUD here
-        // game over UI if maxLives < 0, then exit to main menu after delay
-        ball.ResetBall();
+        // current.text = $"{maxLives}";
+        current.SetText($"{GameManager.GetLives}");
+        // game over UI if maxLives = 0, then exit to main menu after delay
+        if (maxLives <= 0) {
+            Destroy(ball.gameObject);
+            Time.timeScale = 0;
+            gameOverUI.SetActive(true);
+            StartCoroutine(MainMenuTransition());
+        }
+        else {
+            ball.ResetBall();
+        }
+    }
+
+    private IEnumerator MainMenuTransition() {
+        yield return new WaitForSecondsRealtime(1.5f);
+        SceneHandler.Instance.LoadMenuScene();
+        gameOverUI.SetActive(false);
+        Time.timeScale = 1;
+        maxLives = 3;
+        score = 0;
     }
 }
