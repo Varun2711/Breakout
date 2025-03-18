@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using TMPro;
+using UnityEngine;
 
 public class GameManager : SingletonMonoBehavior<GameManager>
 {
@@ -6,6 +7,7 @@ public class GameManager : SingletonMonoBehavior<GameManager>
     [SerializeField] private Ball ball;
     [SerializeField] private Transform bricksContainer;
     [SerializeField] private ScoreCounterUI scoreCounter;
+    [SerializeField] private TextMeshProUGUI current;
 
     private int currentBrickCount;
     private int totalBrickCount;
@@ -16,6 +18,7 @@ public class GameManager : SingletonMonoBehavior<GameManager>
         ball.ResetBall();
         totalBrickCount = bricksContainer.childCount;
         currentBrickCount = bricksContainer.childCount;
+        current.SetText($"{maxLives}");
     }
 
     private void OnDisable()
@@ -46,7 +49,9 @@ public class GameManager : SingletonMonoBehavior<GameManager>
     public void KillBall()
     {
         maxLives--;
+        Debug.Log($"Remaining Lives: {maxLives}");
         // update lives on HUD here
+        current.text = $"{maxLives}";
         // game over UI if maxLives < 0, then exit to main menu after delay
         ball.ResetBall();
     }
