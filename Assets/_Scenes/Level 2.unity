@@ -3321,6 +3321,7 @@ MonoBehaviour:
   ball: {fileID: 4561635119993004754}
   bricksContainer: {fileID: 796630123}
   scoreCounter: {fileID: 896398111}
+  vfx_explosion: {fileID: 2705622291151338662, guid: d5afe77b7ad16274680463a8981b3669, type: 3}
   current: {fileID: 1953834407}
   gameOverUI: {fileID: 1549110993}
 --- !u!1 &1702102464

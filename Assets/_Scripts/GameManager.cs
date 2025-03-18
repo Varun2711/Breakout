@@ -55,9 +55,12 @@ public class GameManager : SingletonMonoBehavior<GameManager>
         Debug.Log($"Destroyed Brick at {position}, {currentBrickCount}/{totalBrickCount} remaining");
         score++;
         scoreCounter.UpdateScore(score);
+        
+        // update counters so that new game is correctly loaded
         if (score == 21)
         {
             score = 0;
+            maxLives = 3;
         }
         if (currentBrickCount == 0)
         {
