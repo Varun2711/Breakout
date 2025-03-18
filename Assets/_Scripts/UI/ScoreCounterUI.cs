@@ -18,8 +18,8 @@ public class ScoreCounterUI : MonoBehaviour
     void Start()
     {
         Canvas.ForceUpdateCanvases();
-        current.SetText($"{GameManager.getScore}");
-        toUpdate.SetText($"{GameManager.getScore}");
+        current.SetText($"{GameManager.GetScore}");
+        toUpdate.SetText($"{GameManager.GetScore}");
         containerInitPosition = coinTextContainer.localPosition.y;
         moveAmount = current.rectTransform.rect.height;
     }

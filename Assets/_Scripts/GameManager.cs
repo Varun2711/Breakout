@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Net.Sockets;
+using UnityEngine;
 
 public class GameManager : SingletonMonoBehavior<GameManager>
 {
@@ -10,7 +11,8 @@ public class GameManager : SingletonMonoBehavior<GameManager>
     private int currentBrickCount;
     private int totalBrickCount;
     private static int score = 0;
-    public static int getScore => score;
+    public static int GetScore => score;
+    public static void SetScore(int s) => score = s;
     private void OnEnable()
     {
         InputHandler.Instance.OnFire.AddListener(FireBall);
@@ -38,6 +40,10 @@ public class GameManager : SingletonMonoBehavior<GameManager>
         Debug.Log($"Destroyed Brick at {position}, {currentBrickCount}/{totalBrickCount} remaining");
         score++;
         scoreCounter.UpdateScore(score);
+        if (score == 21)
+        {
+            score = 0;
+        }
         if (currentBrickCount == 0)
         {
             SceneHandler.Instance.LoadNextScene();
