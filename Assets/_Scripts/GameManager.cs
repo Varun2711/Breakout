@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using System.Collections;
+using TMPro;
 using UnityEngine;
 
 public class GameManager : SingletonMonoBehavior<GameManager>
@@ -49,10 +50,24 @@ public class GameManager : SingletonMonoBehavior<GameManager>
     public void KillBall()
     {
         maxLives--;
-        Debug.Log($"Remaining Lives: {maxLives}");
         // update lives on HUD here
         current.text = $"{maxLives}";
         // game over UI if maxLives < 0, then exit to main menu after delay
-        ball.ResetBall();
+        if (maxLives < 0) {
+            // Freeze time and show game over UI
+            Time.timeScale = 0;
+            // ShowGameOverUI();
+            // Start coroutine to transition to main menu
+            StartCoroutine(GameOverSequence());
+        }
+        else {
+            ball.ResetBall();
+        }
+    }
+
+    private IEnumerator GameOverSequence() {
+        yield return new WaitForSecondsRealtime(1.5f);
+        Time.timeScale = 1;
+        SceneHandler.Instance.LoadMenuScene();
     }
 }
