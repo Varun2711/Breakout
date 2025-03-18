@@ -13,6 +13,7 @@ public class GameManager : SingletonMonoBehavior<GameManager>
     private int currentBrickCount;
     private int totalBrickCount;
     private int score = 0;
+    public GameObject gameOverUI;
     private void OnEnable()
     {
         InputHandler.Instance.OnFire.AddListener(FireBall);
@@ -52,22 +53,22 @@ public class GameManager : SingletonMonoBehavior<GameManager>
         maxLives--;
         // update lives on HUD here
         current.text = $"{maxLives}";
-        // game over UI if maxLives < 0, then exit to main menu after delay
-        if (maxLives < 0) {
-            // Freeze time and show game over UI
+        // game over UI if maxLives = 0, then exit to main menu after delay
+        if (maxLives <= 0) {
+            Destroy(ball.gameObject);
             Time.timeScale = 0;
-            // ShowGameOverUI();
-            // Start coroutine to transition to main menu
-            StartCoroutine(GameOverSequence());
+            gameOverUI.SetActive(true);
+            StartCoroutine(MainMenuTransition());
         }
         else {
             ball.ResetBall();
         }
     }
 
-    private IEnumerator GameOverSequence() {
+    private IEnumerator MainMenuTransition() {
         yield return new WaitForSecondsRealtime(1.5f);
-        Time.timeScale = 1;
         SceneHandler.Instance.LoadMenuScene();
+        gameOverUI.SetActive(false);
+        Time.timeScale = 1;
     }
 }
