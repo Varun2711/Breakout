@@ -578,7 +578,7 @@ MonoBehaviour:
   maxLives: 3
   ball: {fileID: 2054714181}
   bricksContainer: {fileID: 1170594424}
-  coinCounter: {fileID: 0}
+  scoreCounter: {fileID: 1455655855}
 --- !u!1 &397289375
 GameObject:
   m_ObjectHideFlags: 0
@@ -1491,7 +1491,6 @@ GameObject:
   - component: {fileID: 1049737964}
   - component: {fileID: 1049737963}
   - component: {fileID: 1049737962}
-  - component: {fileID: 1049737965}
   m_Layer: 5
   m_Name: ScorePanel
   m_TagString: Untagged
@@ -1584,22 +1583,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1049737960}
   m_CullTransparentMesh: 1
---- !u!114 &1049737965
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1049737960}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 820ad8d2f56ca3d4399913aad0839db2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  current: {fileID: 1285682345}
-  toUpdate: {fileID: 397289378}
-  coinTextContainer: {fileID: 2136368790}
-  duration: 0.4
 --- !u!1 &1147801378
 GameObject:
   m_ObjectHideFlags: 0
@@ -1785,29 +1768,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01614664b831546d2ae94a42149d80ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_SendPointerHoverToParent: 1
-  m_EventSystem: {fileID: 0}
-  m_InputOverride: {fileID: 0}
-  m_DefaultInput: {fileID: 0}
-  m_MoveRepeatDelay: 0.5
-  m_MoveRepeatRate: 0.1
-  m_TrackedDeviceDragThresholdMultiplier: 2
-  m_XRTrackingOrigin: {fileID: 0}
-  m_ActionsAsset: {fileID: -944628639613478452, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_PointAction: {fileID: -1654692200621890270, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_MoveAction: {fileID: -8784545083839296357, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_SubmitAction: {fileID: 392368643174621059, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_CancelAction: {fileID: 7727032971491509709, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_LeftClickAction: {fileID: 3001919216989983466, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_MiddleClickAction: {fileID: -2185481485913320682, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_RightClickAction: {fileID: -4090225696740746782, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_ScrollWheelAction: {fileID: 6240969308177333660, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_TrackedDevicePositionAction: {fileID: 6564999863303420839, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_TrackedDeviceOrientationAction: {fileID: 7970375526676320489, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_DeselectOnBackgroundClick: 1
-  m_PointerBehavior: 0
-  m_CursorLockBehavior: 0
-  m_ScrollDeltaPerTick: 6
 --- !u!114 &1228942222
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2481,7 +2441,8 @@ MonoBehaviour:
   current: {fileID: 1285682345}
   toUpdate: {fileID: 397289378}
   coinTextContainer: {fileID: 2136368790}
-  duration: 0
+  duration: 0.4
+  animationCurve: 28
 --- !u!1 &1605444962
 GameObject:
   m_ObjectHideFlags: 0
