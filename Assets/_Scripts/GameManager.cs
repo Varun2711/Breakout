@@ -6,6 +6,7 @@ public class GameManager : SingletonMonoBehavior<GameManager>
     [SerializeField] private Ball ball;
     [SerializeField] private Transform bricksContainer;
     [SerializeField] private ScoreCounterUI scoreCounter;
+    public GameObject vfx_explosion;
 
     private int currentBrickCount;
     private int totalBrickCount;
@@ -31,7 +32,12 @@ public class GameManager : SingletonMonoBehavior<GameManager>
     public void OnBrickDestroyed(Vector3 position)
     {
         // fire audio here
-        // implement particle effect here
+        // implemented particle effect here
+        if (vfx_explosion != null)
+        {
+            GameObject effect = Instantiate(vfx_explosion, position, Quaternion.identity);
+            Destroy(effect, 1.5f); // Destroy particle effect after 1.5 seconds
+        }
         // add camera shake here
         currentBrickCount--;
         Debug.Log($"Destroyed Brick at {position}, {currentBrickCount}/{totalBrickCount} remaining");
