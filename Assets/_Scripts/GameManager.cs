@@ -14,8 +14,11 @@ public class GameManager : SingletonMonoBehavior<GameManager>
 
     private int currentBrickCount;
     private int totalBrickCount;
-    private int score = 0;
+    private static int score = 0;
+    public static int GetScore => score;
+    public static void SetScore(int s) => score = s;
     public GameObject gameOverUI;
+
     private void OnEnable()
     {
         InputHandler.Instance.OnFire.AddListener(FireBall);
@@ -44,6 +47,10 @@ public class GameManager : SingletonMonoBehavior<GameManager>
         Debug.Log($"Destroyed Brick at {position}, {currentBrickCount}/{totalBrickCount} remaining");
         score++;
         scoreCounter.UpdateScore(score);
+        if (score == 21)
+        {
+            score = 0;
+        }
         if (currentBrickCount == 0)
         {
             SceneHandler.Instance.LoadNextScene();
