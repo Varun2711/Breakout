@@ -8,7 +8,7 @@
 
 **Aadil**: Camera shake element which shakes the camera of the game when the ball destroys a brick. Camera shake has a strength and a duration parameter whose values can be changed to change how strong and long the shake is.
 
-**Varun**:
+**Varun**: A UI element which displays the current score. The score increments by one upon detecting a collision between the ball and a brick. The score is also maintained between the two levels and resets to 0 upon game completion or losing all lives. A simple animation is added to the score update to make it look like a snappy ease in.
 
 **Below is a video of our game!**
 
